@@ -56,15 +56,39 @@
 		AD404CB126E3052D0060B33E /* FSCalendarTest */ = {
 			isa = PBXGroup;
 			children = (
-				AD404CB226E3052D0060B33E /* AppDelegate.swift */,
-				AD404CB426E3052D0060B33E /* SceneDelegate.swift */,
-				AD404CB626E3052D0060B33E /* ViewController.swift */,
-				AD404CB826E3052D0060B33E /* Main.storyboard */,
-				AD404CBB26E3052D0060B33E /* Assets.xcassets */,
-				AD404CBD26E3052D0060B33E /* LaunchScreen.storyboard */,
+				AD404CC826E308240060B33E /* ViewControllers */,
+				AD404CC726E3080C0060B33E /* Views */,
+				AD404CC626E307F80060B33E /* Resources */,
 				AD404CC026E3052D0060B33E /* Info.plist */,
 			);
 			path = FSCalendarTest;
+			sourceTree = "<group>";
+		};
+		AD404CC626E307F80060B33E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AD404CB226E3052D0060B33E /* AppDelegate.swift */,
+				AD404CB426E3052D0060B33E /* SceneDelegate.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AD404CC726E3080C0060B33E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AD404CB826E3052D0060B33E /* Main.storyboard */,
+				AD404CBB26E3052D0060B33E /* Assets.xcassets */,
+				AD404CBD26E3052D0060B33E /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AD404CC826E308240060B33E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AD404CB626E3052D0060B33E /* ViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
