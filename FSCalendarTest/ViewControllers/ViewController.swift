@@ -13,6 +13,28 @@ class ViewController: UIViewController {
     
     private var events:[Date] = []
     
+    private var prevButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Prev", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        return button
+    }()
+    
+    
+    private var nextButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Next", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        return button
+    }()
+    
+
     private var viewFSCalendar:FSCalendar = {
         let calendar = FSCalendar()
         calendar.translatesAutoresizingMaskIntoConstraints = false
@@ -23,15 +45,22 @@ class ViewController: UIViewController {
         calendar.appearance.headerDateFormat = "YYYY년 M월" // set title DateFormat
         calendar.locale = Locale(identifier: "ko_KR") // set weekdayText language
         calendar.appearance.headerMinimumDissolvedAlpha = 0 // set prev, next text alpha
+        calendar.scope = .month
         return calendar
     }()
+    
+    
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(viewFSCalendar)
+        
         setLayout()
+        //upGesture.direction = .up
         initFSCalendar()
         setEvent()
+        
     }
 
     private func setEvent() {  // make points on the bottom of weekday which have events on that day
@@ -45,17 +74,53 @@ class ViewController: UIViewController {
     
     
     private func initFSCalendar() {
+        let upGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(testUpGestureAction(sender:)))
+        upGesture.direction = .up
+        let downGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(testUpGestureAction(sender:)))
+        downGesture.direction = .down
+        viewFSCalendar.addGestureRecognizer(upGesture)
+        viewFSCalendar.addGestureRecognizer(downGesture)
         viewFSCalendar.delegate = self
         viewFSCalendar.dataSource = self
     }
+    
+    
+    
+    
 
+    @objc func testUpGestureAction(sender: UISwipeGestureRecognizer) {
+        if sender.direction == .up {
+            viewFSCalendar.scope = .week
+        }else if sender.direction == .down {
+            viewFSCalendar.scope = .month
+        }
+       
+    }
+    
     private func setLayout() {
         view.addSubview(viewFSCalendar)
+        view.addSubview(prevButton)
+        view.addSubview(nextButton)
         viewFSCalendar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         viewFSCalendar.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
         viewFSCalendar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         viewFSCalendar.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
+        
+        prevButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        prevButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15).isActive = true
+        prevButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        prevButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        nextButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        nextButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15).isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        nextButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
     }
+    
+//    private func moveCurrentPage(moveUp: Bool) {
+//        var currentPage = viewFSCalendar.currentPage
+//
+//    }
 }
 
 extension ViewController: FSCalendarDelegate, FSCalendarDataSource {
@@ -69,12 +134,22 @@ extension ViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         if self.events.contains(date) { // draw points on event day
-            print(1)
             return 1
         } else {
-            print(0)
             return 0
         }
+    }
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        //calendar.scope = .month
+//        calendar.fs_height = bounds.height + 100
+//        self.view.layoutIfNeeded()
+        print("test")
+        
+    }
+    
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        print("changed")
     }
     
 }
