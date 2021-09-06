@@ -141,9 +141,6 @@ extension ViewController: FSCalendarDelegate, FSCalendarDataSource {
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        //calendar.scope = .month
-//        calendar.fs_height = bounds.height + 100
-//        self.view.layoutIfNeeded()
         print("test")
         
     }
