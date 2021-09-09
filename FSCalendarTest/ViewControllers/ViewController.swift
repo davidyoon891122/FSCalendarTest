@@ -79,20 +79,15 @@ class ViewController: UIViewController {
             viewFSCalendar.scope = .week
             heightFSCalendar?.isActive = false
             
-            UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: {
-                self.heightFSCalendar = self.viewFSCalendar.heightAnchor.constraint(equalToConstant: 80)
-                self.heightFSCalendar?.isActive = true
-            }, completion: nil)
+            self.heightFSCalendar = self.viewFSCalendar.heightAnchor.constraint(equalToConstant: 80)
+            self.heightFSCalendar?.isActive = true
+
         }else if sender.direction == .down {
             heightFSCalendar?.isActive = false
-            UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: {
-                self.heightFSCalendar =  self.viewFSCalendar.heightAnchor.constraint(equalToConstant: 175)
-                self.heightFSCalendar?.isActive = true
-            }, completion: nil)
-            
+            self.heightFSCalendar =  self.viewFSCalendar.heightAnchor.constraint(equalToConstant: 175)
+            self.heightFSCalendar?.isActive = true
             
             viewFSCalendar.scope = .month
-            view.layoutIfNeeded()
             
         }
        
