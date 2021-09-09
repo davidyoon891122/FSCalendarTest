@@ -12,28 +12,7 @@ class ViewController: UIViewController {
     
     
     private var events:[Date] = []
-    
-    private var prevButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Prev", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.lightGray.cgColor
-        return button
-    }()
-    
-    
-    private var nextButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Next", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.lightGray.cgColor
-        return button
-    }()
-    
+    var heightFSCalendar: NSLayoutConstraint?
 
     private var viewFSCalendar:FSCalendar = {
         let calendar = FSCalendar()
@@ -49,13 +28,20 @@ class ViewController: UIViewController {
         return calendar
     }()
     
-    
+    private var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .red
+        
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(viewFSCalendar)
-        
+        view.addSubview(tableView)
         setLayout()
         //upGesture.direction = .up
         initFSCalendar()
@@ -91,31 +77,44 @@ class ViewController: UIViewController {
     @objc func testUpGestureAction(sender: UISwipeGestureRecognizer) {
         if sender.direction == .up {
             viewFSCalendar.scope = .week
+            heightFSCalendar?.isActive = false
+            
+            UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: {
+                self.heightFSCalendar = self.viewFSCalendar.heightAnchor.constraint(equalToConstant: 80)
+                self.heightFSCalendar?.isActive = true
+            }, completion: nil)
         }else if sender.direction == .down {
+            heightFSCalendar?.isActive = false
+            UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: {
+                self.heightFSCalendar =  self.viewFSCalendar.heightAnchor.constraint(equalToConstant: 175)
+                self.heightFSCalendar?.isActive = true
+            }, completion: nil)
+            
+            
             viewFSCalendar.scope = .month
+            view.layoutIfNeeded()
+            
         }
        
     }
     
     private func setLayout() {
         view.addSubview(viewFSCalendar)
-        view.addSubview(prevButton)
-        view.addSubview(nextButton)
+        view.addSubview(tableView)
         viewFSCalendar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         viewFSCalendar.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
-        viewFSCalendar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         viewFSCalendar.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
+        heightFSCalendar = viewFSCalendar.heightAnchor.constraint(equalToConstant: 175)
+        heightFSCalendar?.isActive = true
         
-        prevButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
-        prevButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15).isActive = true
-        prevButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        prevButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
-        nextButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
-        nextButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15).isActive = true
-        nextButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        nextButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        tableView.topAnchor.constraint(equalTo: viewFSCalendar.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+
     }
+    
     
 //    private func moveCurrentPage(moveUp: Bool) {
 //        var currentPage = viewFSCalendar.currentPage
@@ -148,6 +147,21 @@ extension ViewController: FSCalendarDelegate, FSCalendarDataSource {
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         print("changed")
     }
+    
+}
+
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
+        cell.testLabel.text = "text"
+        return cell
+    }
+    
     
 }
 

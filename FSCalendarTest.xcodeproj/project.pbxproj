@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		6FFF58627BE55ECF42B30E67 /* Pods_FSCalendarTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E42DE711660CAA03FD44D9 /* Pods_FSCalendarTest.framework */; };
+		AD2D53A026E7B9D90009E24B /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2D539E26E7B9D90009E24B /* TableViewCell.swift */; };
+		AD2D53A126E7B9D90009E24B /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD2D539F26E7B9D90009E24B /* TableViewCell.xib */; };
 		AD404CB326E3052D0060B33E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD404CB226E3052D0060B33E /* AppDelegate.swift */; };
 		AD404CB526E3052D0060B33E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD404CB426E3052D0060B33E /* SceneDelegate.swift */; };
 		AD404CB726E3052D0060B33E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD404CB626E3052D0060B33E /* ViewController.swift */; };
@@ -19,6 +21,8 @@
 /* Begin PBXFileReference section */
 		4117AC0FD5CDFBC05FFEA9DC /* Pods-FSCalendarTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSCalendarTest.release.xcconfig"; path = "Target Support Files/Pods-FSCalendarTest/Pods-FSCalendarTest.release.xcconfig"; sourceTree = "<group>"; };
 		44B4DD0BE54F97A5A54ADFD7 /* Pods-FSCalendarTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSCalendarTest.debug.xcconfig"; path = "Target Support Files/Pods-FSCalendarTest/Pods-FSCalendarTest.debug.xcconfig"; sourceTree = "<group>"; };
+		AD2D539E26E7B9D90009E24B /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		AD2D539F26E7B9D90009E24B /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		AD404CAF26E3052D0060B33E /* FSCalendarTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSCalendarTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD404CB226E3052D0060B33E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD404CB426E3052D0060B33E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 				AD404CB826E3052D0060B33E /* Main.storyboard */,
 				AD404CBB26E3052D0060B33E /* Assets.xcassets */,
 				AD404CBD26E3052D0060B33E /* LaunchScreen.storyboard */,
+				AD2D539E26E7B9D90009E24B /* TableViewCell.swift */,
+				AD2D539F26E7B9D90009E24B /* TableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -112,7 +118,6 @@
 				44B4DD0BE54F97A5A54ADFD7 /* Pods-FSCalendarTest.debug.xcconfig */,
 				4117AC0FD5CDFBC05FFEA9DC /* Pods-FSCalendarTest.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -176,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD404CBF26E3052D0060B33E /* LaunchScreen.storyboard in Resources */,
+				AD2D53A126E7B9D90009E24B /* TableViewCell.xib in Resources */,
 				AD404CBC26E3052D0060B33E /* Assets.xcassets in Resources */,
 				AD404CBA26E3052D0060B33E /* Main.storyboard in Resources */,
 			);
@@ -231,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD404CB726E3052D0060B33E /* ViewController.swift in Sources */,
+				AD2D53A026E7B9D90009E24B /* TableViewCell.swift in Sources */,
 				AD404CB326E3052D0060B33E /* AppDelegate.swift in Sources */,
 				AD404CB526E3052D0060B33E /* SceneDelegate.swift in Sources */,
 			);
